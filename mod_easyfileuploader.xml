@@ -7,7 +7,7 @@
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2</license>
     <authorEmail>michael@valorapps.com</authorEmail>
     <authorUrl>https://www.valorapps.com</authorUrl>
-    <version>2.9.2</version>
+    <version>2.9.2.1</version>
     <description>MOD_EFU_DESCRIPTION</description>
     <namespace>ValorApps\Module\EasyFileUploader</namespace>
     <help url="MOD_EFU_DOCUMENTATION"/>
