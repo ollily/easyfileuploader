@@ -37,6 +37,11 @@ Notes:
 > Notices are represented by hash sign (#)
 > Issues are represented by exclamation sign (!)
 
+Easy File Uploader v2.9.2.1
+================================================================================
++ Added german texts for the front end
+~ Module layout optimized
+~ Submit button style fixed
 
 Easy File Uploader v2.9.2
 ================================================================================
