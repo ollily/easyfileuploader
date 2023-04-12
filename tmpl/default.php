@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		2.9
+* @version		2.9.2.1
 * @author		Michael A. Gilkes (jaido7@yahoo.com)
 * @copyright	Michael Albert Gilkes
 * @license		GNU/GPLv2
@@ -42,6 +42,8 @@ $buttonText = $params->get('efu_button');
 $questionText = $params->get('efu_question');
 $yesText = $params->get('efu_yes');
 $noText = $params->get('efu_no');
+$maxSize = round(intval($params->get('efu_maxsize')) / 1024, 0, PHP_ROUND_HALF_DOWN);
+
 if ($params->get('efu_custom') == 0)
 {
 	$labelText = Text::_('MOD_EFU_LABEL_TEXT');
@@ -52,7 +54,7 @@ if ($params->get('efu_custom') == 0)
 }
 
 //specify the action
-$action = Uri::current();
+$action = Uri::current().Uri::query;
 
 ?>
 <div class="<?php echo $moduleclass_sfx;?>">
@@ -79,23 +81,36 @@ $action = Uri::current();
 	<?php endif; ?>
 	<!-- Input form for the File Upload -->
 	<form enctype="multipart/form-data" action="<?php echo $action; ?>" method="post">
-		<?php if ($params->get('efu_multiple') == "1"): ?>
-		<label for=<?php echo '"'.$params->get('efu_variable').'[]"'; ?>><?php echo $labelText; ?></label>
-		<?php else: ?>
-		<?php echo $labelText; ?><br />
-		<?php endif; ?>
-		<?php 
-		$max = intval($params->get('efu_multiple'));
-		for ($i = 0; $i < $max; $i++): ?>
-		<input type="file" name=<?php echo '"'.$params->get('efu_variable').'[]"'; ?> id=<?php echo '"'.$params->get('efu_variable').'[]"'; ?> style="margin-top:1px; margin-bottom:1px;" /> 
-		<br />
+		<div class="mt-1">
+            <?php if ($params->get('efu_multiple') == "1"): ?>
+            <label for=<?php echo '"'.$params->get('efu_variable').'[]"'; ?>><?php echo $labelText; ?></label><br/>
+            <?php else: ?>
+            <?php echo $labelText; ?><br />
+            <?php endif; ?>
+            <?php
+            $max = intval($params->get('efu_multiple'));
+            for ($i = 0; $i < $max; $i++): ?>
+            <input type="file" name=<?php echo '"'.$params->get('efu_variable').'[]"'; ?> id=<?php echo '"'.$params->get('efu_variable').'[]"'; ?> /><br/>
 		<?php endfor; ?>
+		<?php echo 'Max. '.$maxSize.' KB'; ?>
+		</div>
 		<?php if ($params->get('efu_default_replace') == false && $params->get('efu_replace') == true): /* 1 means 'Yes' or true. 0 means 'No' or false. */ ?>
-		<div><?php echo $questionText; ?></div>
-		<input type="radio" name="answer" value="1" /><?php echo $yesText; ?><br />
-		<input type="radio" name="answer" value="0" checked /><?php echo $noText; ?><br />
-		<br />
+		<div class="mt-1">
+            <div><?php echo $questionText; ?></div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" name="answer" value="1" class="form-check-input" /><?php echo $yesText; ?>
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" name="answer" value="0" class="form-check-input" checked /><?php echo $noText; ?>
+                </label>
+            </div>
+        </div>
 		<?php endif; ?>
-		<input class="btn" type="submit" name="submit" value=<?php echo '"'.$buttonText.'"'; ?> />
+		<div class="mt-2">
+		    <input class="btn btn-primary" type="submit" name="submit" value=<?php echo '"'.$buttonText.'"'; ?> />
+		</div>
 	</form>
 </div>

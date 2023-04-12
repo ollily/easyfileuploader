@@ -1,5 +1,9 @@
 Easy File Uploader v2.9.2
 
+NOTE:
+!! This is a fixed version of the orignal Joomla Easy File Uploader by M.Gilkes. !!
+See CHANGELOG.php
+
 Copyright: Michael A. Gilkes
 License: GNU/GPL v2
 
